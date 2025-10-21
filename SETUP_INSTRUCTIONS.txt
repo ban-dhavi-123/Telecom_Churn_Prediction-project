@@ -1,0 +1,438 @@
+================================================================================
+                    SETUP INSTRUCTIONS
+        Telecom Customer Churn Prediction Project
+================================================================================
+
+📋 TABLE OF CONTENTS
+1. Prerequisites
+2. Installation Steps
+3. Dataset Setup
+4. Running the Project
+5. Verification
+6. Troubleshooting
+
+================================================================================
+1. PREREQUISITES
+================================================================================
+
+Before starting, ensure you have:
+
+✓ Python 3.8 or higher installed
+  - Check: Open Command Prompt and type: python --version
+  - Download from: https://www.python.org/downloads/
+
+✓ pip (Python package manager)
+  - Usually comes with Python
+  - Check: pip --version
+
+✓ Your dataset ready
+  - Location: C:\Users\lssan\Downloads\P585 Churn.xlsx
+  - Format: Excel (.xlsx) or CSV (.csv)
+
+✓ At least 2GB free disk space
+
+✓ Internet connection (for installing packages)
+
+================================================================================
+2. INSTALLATION STEPS
+================================================================================
+
+STEP 1: Navigate to Project Directory
+--------------------------------------
+Open Command Prompt (cmd) and navigate to the project folder:
+
+    cd "d:\Gen AI\ML\Telecom_Churn_Prediction"
+
+
+STEP 2: Create Virtual Environment (Recommended)
+-------------------------------------------------
+Create an isolated Python environment:
+
+    python -m venv venv
+
+This creates a 'venv' folder in your project directory.
+
+
+STEP 3: Activate Virtual Environment
+-------------------------------------
+Activate the virtual environment:
+
+Windows:
+    venv\Scripts\activate
+
+You should see (venv) at the beginning of your command prompt.
+
+
+STEP 4: Install Required Packages
+----------------------------------
+Install all dependencies from requirements.txt:
+
+    pip install -r requirements.txt
+
+This will install:
+- pandas (data manipulation)
+- numpy (numerical computing)
+- scikit-learn (machine learning)
+- xgboost (gradient boosting)
+- matplotlib, seaborn, plotly (visualization)
+- streamlit (web app)
+- jupyter (notebooks)
+- openpyxl (Excel support)
+- And more...
+
+Wait for installation to complete (may take 5-10 minutes).
+
+================================================================================
+3. DATASET SETUP
+================================================================================
+
+OPTION A: Copy Dataset to Project Folder (Recommended)
+-------------------------------------------------------
+1. Open File Explorer
+2. Navigate to: C:\Users\lssan\Downloads\
+3. Find: P585 Churn.xlsx
+4. Copy the file
+5. Navigate to: d:\Gen AI\ML\Telecom_Churn_Prediction\data\
+6. Paste the file
+7. Rename to: telecom_churn.xlsx (optional but recommended)
+
+
+OPTION B: Update Path in Scripts
+---------------------------------
+If you prefer to keep the file in Downloads folder:
+
+1. Open: scripts\data_preprocessing.py
+2. Find line: data_path = "../data/telecom_churn.csv"
+3. Change to: data_path = r"C:\Users\lssan\Downloads\P585 Churn.xlsx"
+4. Save the file
+
+Repeat for:
+- scripts\eda_visualization.py
+- notebooks\telecom_churn_eda.ipynb
+- config.py
+
+================================================================================
+4. RUNNING THE PROJECT
+================================================================================
+
+METHOD 1: Automated Pipeline (Easiest)
+---------------------------------------
+Double-click: run_pipeline.bat
+
+OR from Command Prompt:
+    python run_pipeline.py
+
+This will:
+1. Check for dataset
+2. Preprocess data
+3. Train models
+4. Launch web app
+
+Follow the on-screen prompts.
+
+
+METHOD 2: Step-by-Step Execution
+---------------------------------
+
+STEP A: Data Preprocessing
+    cd scripts
+    python data_preprocessing.py
+    cd ..
+
+Expected output:
+- Preprocessed data saved in models/ folder
+- Files: X_train.pkl, X_test.pkl, y_train.pkl, y_test.pkl, scaler.pkl
+
+
+STEP B: Model Training
+    cd scripts
+    python model_training.py
+    cd ..
+
+Expected output:
+- Trained models saved in models/ folder
+- Performance plots saved in plots/ folder
+- Files: best_model.pkl, random_forest.pkl, xgboost.pkl, etc.
+
+
+STEP C: Launch Web Application
+    streamlit run app.py
+
+Expected output:
+- Streamlit server starts
+- Browser opens automatically at http://localhost:8501
+- If not, manually open: http://localhost:8501
+
+
+METHOD 3: Exploratory Data Analysis (Optional)
+-----------------------------------------------
+To explore data before training:
+
+    jupyter notebook notebooks\telecom_churn_eda.ipynb
+
+This opens an interactive notebook for data exploration.
+
+================================================================================
+5. VERIFICATION
+================================================================================
+
+Check if everything is working:
+
+1. DATASET LOADED
+   - Run: python config.py
+   - Should show: "✓ Configuration validated successfully!"
+
+2. PREPROCESSING COMPLETED
+   - Check if models/ folder contains:
+     ✓ X_train.pkl
+     ✓ X_test.pkl
+     ✓ y_train.pkl
+     ✓ y_test.pkl
+     ✓ scaler.pkl
+     ✓ label_encoders.pkl
+
+3. MODELS TRAINED
+   - Check if models/ folder contains:
+     ✓ best_model.pkl
+     ✓ random_forest.pkl
+     ✓ xgboost.pkl
+     ✓ logistic_regression.pkl
+     ✓ support_vector_machine.pkl
+
+4. PLOTS GENERATED
+   - Check if plots/ folder contains:
+     ✓ confusion_matrices.png
+     ✓ roc_curves.png
+     ✓ metrics_comparison.png
+
+5. WEB APP RUNNING
+   - Open browser: http://localhost:8501
+   - Should see: "Telecom Customer Churn Prediction System"
+   - Try making a prediction
+
+================================================================================
+6. TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Python is not recognized"
+SOLUTION: 
+- Install Python from https://python.org
+- During installation, check "Add Python to PATH"
+- Restart Command Prompt
+
+---
+
+PROBLEM: "pip is not recognized"
+SOLUTION:
+- Reinstall Python with "Add to PATH" option
+- Or use: python -m pip instead of pip
+
+---
+
+PROBLEM: "No module named 'pandas'"
+SOLUTION:
+- Ensure virtual environment is activated
+- Run: pip install -r requirements.txt
+- Check: pip list (should show all packages)
+
+---
+
+PROBLEM: "Dataset not found"
+SOLUTION:
+- Verify file is in data/ folder
+- Check filename matches (case-sensitive)
+- Update path in config.py if needed
+
+---
+
+PROBLEM: "Model file not found"
+SOLUTION:
+- Run preprocessing first: python scripts\data_preprocessing.py
+- Then run training: python scripts\model_training.py
+- Check models/ folder for .pkl files
+
+---
+
+PROBLEM: "Streamlit won't start"
+SOLUTION:
+- Check if port 8501 is free
+- Try different port: streamlit run app.py --server.port 8502
+- Check firewall settings
+
+---
+
+PROBLEM: "Memory Error"
+SOLUTION:
+- Close other applications
+- Reduce dataset size for testing
+- Adjust model parameters in config.py
+
+---
+
+PROBLEM: "Permission Denied"
+SOLUTION:
+- Run Command Prompt as Administrator
+- Check file permissions
+- Ensure no files are open in other programs
+
+---
+
+PROBLEM: "Virtual environment not activating"
+SOLUTION:
+Windows:
+- Use: venv\Scripts\activate.bat
+- Or: venv\Scripts\Activate.ps1 (PowerShell)
+
+Linux/Mac:
+- Use: source venv/bin/activate
+
+---
+
+PROBLEM: "Excel file can't be read"
+SOLUTION:
+- Ensure openpyxl is installed: pip install openpyxl
+- Try converting to CSV format
+- Check if file is corrupted
+
+================================================================================
+7. NEXT STEPS AFTER SETUP
+================================================================================
+
+Once everything is working:
+
+1. EXPLORE THE WEB APP
+   - Try single predictions
+   - Upload batch files
+   - View model performance
+
+2. CUSTOMIZE THE PROJECT
+   - Edit config.py for different settings
+   - Modify model parameters
+   - Add new features
+
+3. EXPERIMENT WITH DATA
+   - Run EDA notebook
+   - Try different preprocessing
+   - Engineer new features
+
+4. DEPLOY TO PRODUCTION
+   - Use Docker: docker build -t churn-prediction .
+   - Deploy to cloud (AWS, Azure, GCP)
+   - Set up monitoring
+
+================================================================================
+8. USEFUL COMMANDS
+================================================================================
+
+# Activate virtual environment
+venv\Scripts\activate
+
+# Deactivate virtual environment
+deactivate
+
+# Install packages
+pip install -r requirements.txt
+
+# Update packages
+pip install --upgrade -r requirements.txt
+
+# List installed packages
+pip list
+
+# Run preprocessing
+python scripts\data_preprocessing.py
+
+# Run training
+python scripts\model_training.py
+
+# Launch web app
+streamlit run app.py
+
+# Launch Jupyter
+jupyter notebook
+
+# Check Python version
+python --version
+
+# Check pip version
+pip --version
+
+# Run configuration check
+python config.py
+
+# Run complete pipeline
+python run_pipeline.py
+
+================================================================================
+9. PROJECT STRUCTURE OVERVIEW
+================================================================================
+
+Telecom_Churn_Prediction/
+│
+├── data/                       ← Place your dataset here
+│   ├── telecom_churn.xlsx     ← Your dataset
+│   └── README.md              ← Data instructions
+│
+├── notebooks/                  ← Jupyter notebooks
+│   └── telecom_churn_eda.ipynb
+│
+├── scripts/                    ← Python scripts
+│   ├── data_preprocessing.py  ← Run first
+│   ├── model_training.py      ← Run second
+│   └── eda_visualization.py   ← Optional
+│
+├── models/                     ← Saved models (generated)
+│   ├── best_model.pkl
+│   ├── X_train.pkl
+│   └── ...
+│
+├── plots/                      ← Visualizations (generated)
+│   ├── confusion_matrices.png
+│   ├── roc_curves.png
+│   └── ...
+│
+├── venv/                       ← Virtual environment (created)
+│
+├── app.py                      ← Streamlit web app
+├── config.py                   ← Configuration settings
+├── requirements.txt            ← Package dependencies
+├── Dockerfile                  ← Docker configuration
+├── run_pipeline.py             ← Automated pipeline
+├── run_pipeline.bat            ← Windows batch script
+├── README.md                   ← Full documentation
+├── QUICKSTART.md               ← Quick start guide
+├── project_summary.txt         ← Project overview
+└── SETUP_INSTRUCTIONS.txt      ← This file
+
+================================================================================
+10. GETTING HELP
+================================================================================
+
+If you encounter issues:
+
+1. Check this file first
+2. Read README.md for detailed documentation
+3. Review error messages carefully
+4. Check if all files are in correct locations
+5. Verify all dependencies are installed
+6. Ensure dataset is properly formatted
+
+For additional support:
+- Check project documentation
+- Review code comments
+- Test with sample data first
+
+================================================================================
+                        SETUP COMPLETE!
+================================================================================
+
+You're now ready to use the Telecom Customer Churn Prediction system!
+
+Quick Start:
+1. Ensure dataset is in data/ folder
+2. Run: python run_pipeline.py
+3. Access web app at: http://localhost:8501
+
+Happy Predicting! 🎉
+
+================================================================================
